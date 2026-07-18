@@ -34,7 +34,13 @@ LCShop là dự án website bán đồ công nghệ được xây dựng nhằm 
 
 Đây không chỉ là một website bán hàng mà còn là dự án Portfolio để xin việc vị trí Frontend Developer / Fullstack Developer.
 
+Cũng như là dự án đánh dấu quá trình học tập và trưởng thành của Cường từ một sinh viên mới tốt nghiệp trở thành một Fullstack Developer.
+
+Toàn bộ hệ thống được tự phân tích, tự thiết kế và tự phát triển theo quy trình doanh nghiệp.
+
 Mục tiêu của dự án không phải code nhanh mà là hiểu toàn bộ quy trình từ phân tích nghiệp vụ, thiết kế UI/UX, thiết kế Database, xây dựng Frontend, Backend và triển khai sản phẩm.
+
+Mục tiêu cuối cùng là xây dựng một Portfolio chất lượng để ứng tuyển vào vị trí Frontend Developer hoặc Fullstack Developer.
 
 ---
 
