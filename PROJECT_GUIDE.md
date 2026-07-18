@@ -1,6 +1,6 @@
 # 🛒 PROJECT GUIDE
 
-> **Project:** TechStore  
+> **Project:** LCShop  
 > **Author:** Lưu Cường  
 > **Mentor:** Anh T (ChatGPT)  
 > **Project Type:** Portfolio Project  
@@ -30,7 +30,7 @@ Nếu có thay đổi kiến trúc hãy giải thích lý do.
 
 # 1. Project Vision
 
-TechStore là dự án website bán đồ công nghệ được xây dựng nhằm mô phỏng quy trình phát triển phần mềm trong doanh nghiệp.
+LCShop là dự án website bán đồ công nghệ được xây dựng nhằm mô phỏng quy trình phát triển phần mềm trong doanh nghiệp.
 
 Đây không chỉ là một website bán hàng mà còn là dự án Portfolio để xin việc vị trí Frontend Developer / Fullstack Developer.
 
