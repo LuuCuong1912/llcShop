@@ -417,3 +417,682 @@ Hiểu:
 Next Session:
 
 Tiếp tục hoàn thiện ERD.
+
+# LCShop - Project Guide
+
+Version: 1.0
+Project Owner: Lưu Lý Cường
+
+---
+
+# Project Vision
+
+LCShop là website thương mại điện tử bán các sản phẩm công nghệ dành cho sinh viên, đặc biệt hướng đến những bạn chuẩn bị lên TP.HCM học tập.
+
+Mục tiêu của dự án không phải chỉ tạo ra một website bán hàng mà còn là Portfolio thể hiện tư duy Software Engineering, quy trình phát triển phần mềm và khả năng Fullstack Developer.
+
+---
+
+# Development Philosophy
+
+Không học theo kiểu:
+
+"Học xong mới làm."
+
+Mà sẽ theo phương pháp:
+
+Phân tích → Thiết kế → Code → Review → Refactor
+
+Mọi tính năng đều phải được phân tích trước khi viết code.
+
+---
+
+# Frontend Design Decisions
+
+## UI Style
+
+Modern
+
+Minimal
+
+Professional
+
+Clean
+
+Apple Style
+
+Responsive
+
+---
+
+## Color Palette
+
+Primary
+#2563EB
+
+Primary Hover
+#1D4ED8
+
+Secondary
+#1E40AF
+
+Background
+#F8FAFC
+
+Surface
+#FFFFFF
+
+Border
+#E5E7EB
+
+Title
+#111827
+
+Body Text
+#4B5563
+
+Placeholder
+#9CA3AF
+
+Success
+#22C55E
+
+Warning
+#F59E0B
+
+Error
+#EF4444
+
+---
+
+## Typography
+
+Font Family
+
+Inter
+
+---
+
+## Border Radius
+
+12px
+
+Áp dụng cho
+
+Button
+
+Input
+
+Card
+
+Modal
+
+Badge
+
+---
+
+## Shadow
+
+Sử dụng duy nhất
+
+shadow-md
+
+hoặc
+
+0 2px 8px rgba(0,0,0,.08)
+
+Không sử dụng shadow quá lớn.
+
+---
+
+## Spacing
+
+Sử dụng hệ thống 8pt.
+
+4
+
+8
+
+16
+
+24
+
+32
+
+40
+
+48
+
+64
+
+Không sử dụng khoảng cách ngẫu nhiên.
+
+---
+
+## UI Components
+
+Button
+
+Input
+
+Card
+
+Navbar
+
+Footer
+
+Product Card
+
+Modal
+
+Toast
+
+Badge
+
+Pagination
+
+Search Box
+
+Category Tabs
+
+---
+
+## Icon
+
+Lucide React
+
+---
+
+## Animation
+
+transition:200ms
+
+Hover Scale
+
+1.02
+
+Không sử dụng animation rườm rà.
+
+---
+
+# Frontend Architecture
+
+React
+
+React Router
+
+Axios
+
+Context API (hoặc Redux sau này nếu cần)
+
+Folder Structure
+
+src
+
+components/
+
+pages/
+
+layouts/
+
+routes/
+
+services/
+
+hooks/
+
+contexts/
+
+assets/
+
+utils/
+
+constants/
+
+styles/
+
+---
+
+# Wireframe
+
+Đã hoàn thành
+
+Home Page
+
+Product Detail
+
+Cart / Checkout
+
+Các wireframe sẽ được sử dụng làm chuẩn khi code.
+
+---
+
+# Backend Design Decisions
+
+Architecture
+
+MVC + Service Layer
+
+Không sử dụng Repository Pattern ở phiên bản đầu.
+
+---
+
+# Backend Flow
+
+Frontend
+
+↓
+
+Router
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Model
+
+↓
+
+Database
+
+↓
+
+Model
+
+↓
+
+Service
+
+↓
+
+Controller
+
+↓
+
+HTTP Response
+
+↓
+
+Frontend
+
+---
+
+# Responsibility
+
+Router
+
+- Chỉ định tuyến.
+
+Middleware
+
+- Authentication
+
+- Authorization
+
+- Validation
+
+Controller
+
+- Nhận Request
+
+- Gọi Service
+
+- Trả Response
+
+Không chứa Business Logic.
+
+Service
+
+- Chứa toàn bộ Business Logic.
+
+Model
+
+- CRUD Database.
+
+Không chứa Business Logic.
+
+Database
+
+- Chỉ lưu dữ liệu.
+
+---
+
+# Backend Folder Structure
+
+src
+
+config/
+
+routes/
+
+middlewares/
+
+controllers/
+
+services/
+
+models/
+
+---
+
+Sau này sẽ mở rộng
+
+validators/
+
+utils/
+
+constants/
+
+uploads/
+
+---
+
+# Config
+
+Config sẽ chứa
+
+Database Connection
+
+JWT Config
+
+CORS Config
+
+Cloudinary Config
+
+Environment Config
+
+---
+
+# Environment Variables
+
+.env sẽ chứa
+
+PORT
+
+NODE_ENV
+
+Database
+
+JWT
+
+Cloudinary
+
+Email
+
+Client URL
+
+Không lưu dữ liệu nghiệp vụ.
+
+Không commit lên GitHub.
+
+---
+
+# API Style
+
+RESTful API
+
+Ví dụ
+
+GET /products
+
+GET /products/:id
+
+POST /products
+
+PUT /products/:id
+
+DELETE /products/:id
+
+POST /login
+
+POST /register
+
+POST /orders
+
+GET /orders
+
+---
+
+# Database Principles
+
+Thiết kế chuẩn hóa.
+
+Sử dụng khóa chính id.
+
+Tên bảng số nhiều.
+
+Ví dụ
+
+users
+
+products
+
+orders
+
+order_items
+
+cart_items
+
+categories
+
+brands
+
+product_images
+
+Không lưu dữ liệu trùng lặp.
+
+---
+
+# Business Rules
+
+Order
+
+1 Order
+
+↓
+
+N OrderItems
+
+Product
+
+1 Product
+
+↓
+
+N ProductImages
+
+Category
+
+1 Category
+
+↓
+
+N Products
+
+Brand
+
+1 Brand
+
+↓
+
+N Products
+
+User
+
+1 User
+
+↓
+
+N Orders
+
+Cart
+
+1 User
+
+↓
+
+1 Cart
+
+Cart
+
+1 Cart
+
+↓
+
+N CartItems
+
+---
+
+# Development Rules
+
+Không Copy Code.
+
+Không AI Generate toàn bộ Project.
+
+Mọi đoạn code phải hiểu trước khi Merge.
+
+Sau mỗi Sprint phải Review.
+
+Sau mỗi Feature phải Commit Git.
+
+Không Fix Bug bằng Copy Paste.
+
+---
+
+# Git Commit Convention
+
+feat:
+
+fix:
+
+refactor:
+
+docs:
+
+style:
+
+chore:
+
+---
+
+# Code Convention
+
+camelCase
+
+PascalCase
+
+Tên biến rõ nghĩa.
+
+Không viết tắt.
+
+Không hard-code.
+
+---
+
+# Design Principles
+
+Single Responsibility
+
+DRY
+
+KISS
+
+RESTful
+
+MVC
+
+Clean Code
+
+---
+
+# Goal
+
+Không chỉ tạo ra website.
+
+Mà tạo ra một dự án đủ chất lượng để:
+
+Portfolio
+
+Phỏng vấn Fresher
+
+Phỏng vấn Junior
+
+Có khả năng mở rộng thành Production Project.
+
+---
+
+# Current Progress
+
+Sprint 0 ✅
+
+Business Analysis
+
+Sprint 1 ✅
+
+Business Flow
+
+Sprint 2 ✅
+
+Sitemap
+
+Sprint 3 ✅
+
+Wireframe
+
+Sprint 4 ✅
+
+ERD
+
+Sprint 5 ⏳
+
+REST API Design
+
+Sprint 6
+
+Project Setup
+
+Sprint 7
+
+Authentication
+
+Sprint 8
+
+Frontend Development
+
+Sprint 9
+
+Backend Development
+
+Sprint 10
+
+Integration
+
+Sprint 11
+
+Testing
+
+Sprint 12
+
+Deployment
+
+---
+
+# Mentor Notes
+
+LCShop được xây dựng theo định hướng Software Engineering thay vì chỉ học cú pháp.
+
+Ưu tiên tư duy thiết kế hệ thống, kiến trúc phần mềm và quy trình phát triển thực tế.
+
+Mọi quyết định kiến trúc đều phải có lý do, không thêm thành phần chỉ vì dự án mẫu có.
+
+Code phải dễ đọc, dễ mở rộng và dễ bảo trì.
