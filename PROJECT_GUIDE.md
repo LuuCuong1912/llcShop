@@ -1096,3 +1096,367 @@ LCShop được xây dựng theo định hướng Software Engineering thay vì 
 Mọi quyết định kiến trúc đều phải có lý do, không thêm thành phần chỉ vì dự án mẫu có.
 
 Code phải dễ đọc, dễ mở rộng và dễ bảo trì.
+
+# 📅 Nhật ký dự án LCShop
+## Ngày: 19/07/2026
+
+---
+
+# 🎯 Mục tiêu buổi học
+
+- Hoàn thiện thiết kế Database (ERD).
+- Thống nhất kiến trúc Backend.
+- Thống nhất môi trường phát triển.
+- Chuẩn bị bước chuyển từ giai đoạn thiết kế sang lập trình.
+
+---
+
+# ✅ Công việc đã hoàn thành
+
+## 1. Database (ERD)
+
+Đã hoàn thiện phần lớn các bảng chính của hệ thống.
+
+Bao gồm:
+
+- users
+- products
+- product_images
+- product_details
+- categories
+- carts
+- cart_items
+- orders
+- order_items
+
+### Quy tắc đã thống nhất
+
+- Category 1 - N Products
+- Product 1 - N ProductImages
+- Product 1 - 1 ProductDetail
+- User 1 - 1 Cart
+- Cart 1 - N CartItems
+- User 1 - N Orders
+- Order 1 - N OrderItems
+
+Không sử dụng quan hệ N-N trực tiếp.
+Nếu có quan hệ nhiều - nhiều sẽ tách thành bảng trung gian.
+
+---
+
+## 2. Thiết kế Product
+
+Đã thống nhất:
+
+products chỉ lưu thông tin hiển thị.
+
+Ví dụ:
+
+- tên
+- giá
+- thumbnail
+- category
+- brand
+- stock
+- ...
+
+Các thông số kỹ thuật:
+
+- CPU
+- RAM
+- SSD
+- Bảo hành
+- Model
+- Kích thước màn hình
+
+được lưu trong bảng product_details.
+
+Mục đích:
+
+- Database chuẩn hóa.
+- Có thể mở rộng nhiều loại sản phẩm khác nhau.
+
+---
+
+## 3. Cart và Order
+
+Đã phân biệt rõ.
+
+Cart:
+
+- Giỏ hàng tạm.
+- Có thể sửa.
+- Có thể xóa.
+- Chưa thanh toán.
+
+Order:
+
+- Đơn hàng đã được tạo.
+- Lưu lịch sử mua hàng.
+- Không phụ thuộc vào Cart sau khi Checkout.
+
+Checkout sẽ copy dữ liệu từ Cart sang Order.
+
+Sau khi tạo Order thành công:
+
+- CartItem sẽ bị xóa.
+- Cart vẫn tồn tại.
+
+---
+
+## 4. OrderItem
+
+Đã thống nhất.
+
+subtotal không lưu bằng tay.
+
+Backend sẽ tính:
+
+subtotal = quantity × unit_price
+
+Service chịu trách nhiệm xử lý.
+
+---
+
+## 5. Frontend
+
+Đã thống nhất:
+
+Wireframe đã đủ để bắt đầu lập trình.
+
+Bao gồm:
+
+- Home
+- Product List
+- Product Detail
+- Cart / Checkout
+
+Các Wireframe sẽ còn được cải tiến trong quá trình phát triển.
+
+Không cần thiết kế quá hoàn hảo ngay từ đầu.
+
+---
+
+## 6. Backend Architecture
+
+Đã thống nhất sử dụng:
+
+MVC + Service Layer
+
+Luồng xử lý:
+
+Client
+
+↓
+
+Router
+
+↓
+
+Middleware
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Model
+
+↓
+
+Database
+
+Controller:
+
+- Nhận request.
+- Trả response.
+
+Service:
+
+- Chứa toàn bộ Business Logic.
+
+Model:
+
+- Làm việc trực tiếp với Database.
+
+Middleware:
+
+- Authentication
+- Authorization
+- Validation
+- Logging
+
+---
+
+## 7. Environment
+
+Đã thống nhất sẽ sử dụng:
+
+Frontend
+
+- React
+- Vite
+
+Backend
+
+- NodeJS
+- ExpressJS
+
+Database
+
+- MySQL
+
+Version Control
+
+- Git
+- GitHub
+
+---
+
+## 8. Docker
+
+Đã tìm hiểu.
+
+Ưu điểm:
+
+- Môi trường đồng nhất.
+- Chạy nhanh.
+- Dễ triển khai.
+
+Tuy nhiên quyết định hiện tại:
+
+KHÔNG sử dụng Docker.
+
+Lý do:
+
+Muốn học MySQL từ nền tảng trước.
+
+Sau khi thành thạo sẽ học Docker sau.
+
+---
+
+## 9. MySQL
+
+Đã gặp lỗi:
+
+Bad Download
+
+Temp file removed
+
+Nguyên nhân:
+
+Không phải lỗi MySQL Server.
+
+Là lỗi MySQL Installer không tải được package.
+
+Kế hoạch:
+
+Không dùng bản ZIP.
+
+Sẽ cài lại MySQL Community Server đúng cách.
+
+---
+
+# 📚 Kiến thức học được hôm nay
+
+- Chuẩn hóa Database.
+- Quan hệ 1-1.
+- Quan hệ 1-N.
+- Vai trò của bảng trung gian.
+- Khác nhau giữa Cart và Order.
+- subtotal được tính bởi Backend.
+- MVC Architecture.
+- Service Layer Pattern.
+- Middleware.
+- Docker là gì.
+- Vai trò của .env.
+- Quy trình phát triển Backend.
+
+---
+
+# 📌 Quyết định cuối cùng
+
+LCShop sẽ sử dụng:
+
+Frontend
+
+- React
+- Vite
+
+Backend
+
+- NodeJS
+- ExpressJS
+
+Architecture
+
+- MVC + Service Layer
+
+Database
+
+- MySQL
+
+ORM
+
+(Sẽ quyết định sau)
+
+---
+
+# 🎯 Công việc tiếp theo
+
+Sprint tiếp theo:
+
+1. Cài đặt MySQL Community Server thành công.
+2. Tạo Database lcshop.
+3. Import Database.
+4. Kiểm tra toàn bộ bảng.
+5. Khởi tạo Project Backend.
+6. Khởi tạo Project Frontend.
+
+---
+
+# 📝 Mentor Note
+
+Không đổi công nghệ chỉ vì gặp lỗi.
+
+Ưu tiên hiểu bản chất trước.
+
+Mục tiêu của dự án LCShop không phải chỉ tạo ra một website.
+
+Mục tiêu là xây dựng một dự án Fullstack theo chuẩn doanh nghiệp để sử dụng làm Portfolio khi xin việc.
+
+# 🎯 Triết lý phát triển LCShop
+
+LCShop không được xây dựng theo hướng "code cho chạy".
+
+Mỗi quyết định về:
+
+- Database
+- Kiến trúc
+- API
+- UI
+- Frontend
+- Backend
+
+đều phải có lý do.
+
+Mục tiêu cuối cùng:
+
+- Hiểu bản chất.
+- Viết code sạch.
+- Dễ mở rộng.
+- Có thể bảo trì.
+- Có thể đưa vào Portfolio khi xin việc.
+
+Trong quá trình phát triển:
+
+- Không ngại refactor.
+- Không sợ sửa Database.
+- Không sợ thay đổi thiết kế nếu có giải pháp tốt hơn.
+
+Ưu tiên chất lượng hơn tốc độ.
