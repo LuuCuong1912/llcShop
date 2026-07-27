@@ -1460,3 +1460,342 @@ Trong quá trình phát triển:
 - Không sợ thay đổi thiết kế nếu có giải pháp tốt hơn.
 
 Ưu tiên chất lượng hơn tốc độ.
+
+# Sprint 8 - Backend Foundation
+
+Ngày cập nhật: 27/07/2026
+
+---
+
+# Mục tiêu
+
+Bắt đầu xây dựng Backend cho dự án LCShop theo kiến trúc MVC.
+
+Không viết chức năng ngay mà tập trung xây dựng nền móng của hệ thống.
+
+---
+
+# Công việc đã hoàn thành
+
+## 1. Khởi tạo Backend
+
+Đã tạo thư mục:
+
+backend/
+
+Đã khởi tạo NodeJS project:
+
+```bash
+npm init -y
+```
+
+Sinh ra file:
+
+- package.json
+
+---
+
+## 2. Cài đặt thư viện
+
+Production:
+
+```bash
+npm install express mysql2 dotenv cors bcrypt jsonwebtoken
+```
+
+Development:
+
+```bash
+npm install -D nodemon
+```
+
+Đã hiểu mục đích của từng package:
+
+| Package | Chức năng |
+|----------|-----------|
+| express | Web Framework |
+| mysql2 | Kết nối MySQL |
+| dotenv | Đọc biến môi trường |
+| cors | Cho phép Frontend gọi API |
+| bcrypt | Băm mật khẩu |
+| jsonwebtoken | JWT Authentication |
+| nodemon | Tự khởi động lại server khi lưu file |
+
+---
+
+## 3. Xây dựng cấu trúc Backend
+
+```text
+backend
+│
+├── src
+│   ├── config
+│   ├── controllers
+│   ├── middlewares
+│   ├── models
+│   ├── routes
+│   ├── services
+│   ├── utils
+│   ├── app.js
+│   └── server.js
+│
+├── .env
+├── .gitignore
+├── package.json
+└── package-lock.json
+```
+
+---
+
+## 4. Ý nghĩa từng thư mục
+
+### config
+
+Chứa toàn bộ cấu hình hệ thống.
+
+Ví dụ:
+
+- Database
+- JWT
+- Cloudinary
+
+---
+
+### controllers
+
+Nhận Request.
+
+Gọi Service.
+
+Trả Response.
+
+Không xử lý Business Logic.
+
+---
+
+### services
+
+Là nơi xử lý toàn bộ Business Logic của hệ thống.
+
+Ví dụ:
+
+- Tính tổng tiền
+- Kiểm tra tồn kho
+- Kiểm tra quyền
+- Kiểm tra Voucher
+
+---
+
+### models
+
+Chỉ làm việc với Database.
+
+Thực hiện:
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+
+Không chứa Business Logic.
+
+---
+
+### routes
+
+Khai báo API.
+
+Ví dụ:
+
+GET /products
+
+POST /login
+
+POST /orders
+
+---
+
+### middlewares
+
+Chạy trước Controller.
+
+Ví dụ:
+
+- Authentication
+- Authorization
+- Validate Request
+- Upload File
+- Logger
+
+---
+
+### utils
+
+Các hàm dùng chung.
+
+Ví dụ:
+
+- Format tiền
+- Format ngày
+- Generate Order Code
+
+---
+
+## 5. File .env
+
+Là file chứa các thông tin cấu hình và dữ liệu nhạy cảm.
+
+Ví dụ:
+
+```env
+PORT=5000
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=******
+DB_NAME=lcshop
+
+JWT_SECRET=your-secret-key
+```
+
+Không được commit lên GitHub.
+
+Đã thêm vào:
+
+.gitignore
+
+---
+
+## 6. Hiểu sự khác nhau giữa app.js và server.js
+
+### app.js
+
+Có nhiệm vụ:
+
+- Khởi tạo Express
+- Khai báo Middleware
+- Khai báo Routes
+
+Không chạy Server.
+
+Có thể hiểu:
+
+"Xây dựng ứng dụng."
+
+---
+
+### server.js
+
+Có nhiệm vụ:
+
+- Đọc file .env
+- Import app.js
+- app.listen(PORT)
+
+Có thể hiểu:
+
+"Khởi động ứng dụng."
+
+---
+
+## 7. Luồng hoạt động Backend
+
+server.js
+
+↓
+
+app.js
+
+↓
+
+Routes
+
+↓
+
+Middlewares
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Models
+
+↓
+
+Database
+
+---
+
+## 8. Tư duy kiến trúc
+
+Controller
+
+↓
+
+Điều phối Request/Response
+
+Service
+
+↓
+
+Xử lý nghiệp vụ
+
+Model
+
+↓
+
+Làm việc với Database
+
+Mỗi tầng chỉ đảm nhận đúng một trách nhiệm.
+
+---
+
+# Những điều đã thống nhất
+
+- Áp dụng mô hình MVC.
+- Business Logic chỉ nằm trong Service.
+- Model không chứa Business Logic.
+- Controller không thao tác trực tiếp với Database.
+- Middleware dùng cho Authentication, Authorization và các xử lý dùng chung.
+- Cấu hình nhạy cảm phải đặt trong .env.
+
+---
+
+# Chưa thực hiện
+
+- Chạy Express Server.
+- Kết nối MySQL.
+- Viết db.js.
+- Xây dựng API đầu tiên.
+- Kết nối Frontend.
+
+---
+
+# Kế hoạch Sprint tiếp theo
+
+## Sprint 9
+
+Mục tiêu:
+
+Làm cho Backend chạy thành công.
+
+Thực hiện:
+
+- Viết app.js.
+- Viết server.js.
+- Chạy npm run dev.
+- Truy cập localhost:5000.
+- Hiển thị thông báo:
+
+Welcome to LCShop Backend 🚀
+
+Sau khi Express hoạt động ổn định sẽ chuyển sang:
+
+Kết nối MySQL theo chuẩn MVC.
