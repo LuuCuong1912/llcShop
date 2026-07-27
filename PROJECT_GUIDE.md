@@ -1799,3 +1799,144 @@ Welcome to LCShop Backend 🚀
 Sau khi Express hoạt động ổn định sẽ chuyển sang:
 
 Kết nối MySQL theo chuẩn MVC.
+
+📅 Project Guide Update - Sprint 10
+
+Ngày: 27/07/2026
+
+✅ Hoàn thành
+1. MySQL
+Cài đặt thành công MySQL Workbench.
+Import thành công Database lcshop.
+Kết nối thành công từ Backend.
+Hoàn thành config/db.js bằng Connection Pool (mysql2/promise).
+
+Xác nhận kết nối thành công với:
+
+✅ Connected to MySQL
+
+
+2. Backend Foundation
+
+Hoàn thành cấu trúc dự án:
+
+backend/
+│
+├── config/
+│     db.js
+│
+├── controllers/
+│
+├── models/
+│
+├── routes/
+│
+├── services/
+│
+├── middlewares/
+│
+├── .env
+│
+├── app.js
+│
+└── server.js
+
+6. Tư duy phát triển API
+
+Mỗi API đều đi theo quy trình:
+
+Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Model
+
+↓
+
+Database
+
+↓
+
+Model
+
+↓
+
+Service
+
+↓
+
+Controller
+
+↓
+
+Response
+
+Đã thống nhất bổ sung:
+
+constants/
+constants/
+
+httpStatus.js
+
+messages.js
+
+roles.js
+
+orderStatus.js
+
+paymentMethod.js
+
+Mục tiêu:
+
+Không hard-code.
+Tăng khả năng bảo trì.
+Dễ mở rộng.
+
+🚀 Sprint tiếp theo
+Sprint 11
+
+Module Product
+
+Mục tiêu
+
+Hoàn thành API đầu tiên:
+
+GET /api/products
+
+Theo đúng MVC.
+
+Thứ tự thực hiện:
+
+1. product.route.js
+
+↓
+
+2. product.controller.js
+
+↓
+
+3. product.service.js
+
+↓
+
+4. product.model.js
+
+↓
+
+5. SELECT * FROM products
+
+↓
+
+6. Trả JSON
+
+↓
+
+7. Test bằng Postman
