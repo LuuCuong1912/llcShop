@@ -1940,3 +1940,146 @@ Thứ tự thực hiện:
 ↓
 
 7. Test bằng Postman
+
+
+📅 Cập nhật Project Guide - 27/07/2026
+Sprint 11 - API Response Standardization
+Mục tiêu
+
+Chuẩn hóa cấu trúc Response để toàn bộ API trong LCShop có định dạng thống nhất.
+
+Kiến trúc Response
+
+Tạo:
+
+src/
+└── utils/
+      response.js
+success(res, status, message, data)
+
+error(res, status, message)
+
+Controller không còn trực tiếp:
+
+res.status(...).json(...)
+
+mà sẽ sử dụng
+
+response.success(...)
+
+hoặc
+
+response.error(...)
+Chuẩn Response
+
+Mọi API thành công sẽ theo cấu trúc:
+
+{
+    "success": true,
+    "status": 200,
+    "message": "OK",
+    "data": {}
+}
+
+API lỗi:
+
+{
+    "success": false,
+    "status": 404,
+    "message": "Product not found",
+    "data": null
+}
+Quy tắc data
+
+data không phải là tên của Product hay User.
+
+Nó là trường cố định trong JSON Response.
+
+Giá trị của data được truyền từ Controller.
+
+Ví dụ:
+
+const products = await productService.getAllProducts();
+
+response.success(
+    res,
+    httpStatus.OK,
+    messages.SUCCESS,
+    products
+);
+
+Sau này có thể truyền:
+
+users
+order
+cart
+token
+
+mà không cần sửa response.js.
+
+Quy tắc Controller
+
+Controller chỉ làm 3 việc:
+
+Nhận Request
+Gọi Service
+Trả Response
+
+Không viết SQL.
+
+Không xử lý Business Logic.
+
+Không truy cập Database.
+
+Quy tắc Service
+
+Service chịu trách nhiệm:
+
+Business Logic
+Gọi Model
+Trả dữ liệu về Controller
+Quy tắc Model
+
+Model chịu trách nhiệm:
+
+Query MySQL
+Không xử lý HTTP Response
+Không xử lý Request
+Logger
+
+Đã nghiên cứu Middleware Logger.
+
+Hiểu được:
+
+Logger chỉ chạy khi có HTTP Request.
+Logger không chạy khi Server khởi động.
+Sau này Logger sẽ được nâng cấp để log:
+Method
+URL
+Status Code
+Response Time
+Timestamp
+Kinh nghiệm Debug hôm nay
+
+Đã gặp và xử lý các lỗi:
+
+Cannot find module
+Kiểm tra đúng tên file và đường dẫn require().
+argument handler must be a function
+Nguyên nhân: Controller chưa export hoặc Route truyền sai handler.
+productService.getAllProducts is not a function
+Nguyên nhân: Service chưa có hàm hoặc chưa export đúng.
+await is only valid in async functions
+Nguyên nhân: Đặt code của Controller nhầm vào product.service.js.
+Đánh giá tiến độ
+
+Đến hiện tại, nền tảng Backend của LCShop đã có:
+
+✅ MVC Architecture
+✅ Express
+✅ Kết nối MySQL
+✅ Constants (httpStatus, messages)
+✅ Middleware cơ bản
+✅ Logger (phiên bản đầu)
+✅ Chuẩn hóa API Response (giai đoạn 1)
+✅ Route → Controller → Service → Model đã được hiểu rõ về vai trò từng tầng
