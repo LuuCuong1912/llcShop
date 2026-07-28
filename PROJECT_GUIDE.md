@@ -229,7 +229,128 @@ Next
 - Orders
 - Order Items
 - Reviews
-- Payments
+- 
+CREATE TABLE `users` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `username` varchar(255),
+  `email` varchar(255),
+  `password_hash` varchar(255),
+  `full_name` varchar(255),
+  `phone` varchar(255),
+  `address` text,
+  `role` varchar(255),
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+
+CREATE TABLE `categories` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `category_name` varchar(255),
+  `created_at` timestamp
+);
+
+CREATE TABLE `brands` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `brand_name` varchar(255),
+  `created_at` timestamp
+);
+
+CREATE TABLE `products` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `category_id` int,
+  `brand_id` int,
+  `product_name` varchar(255),
+  `description` text,
+  `price` decimal,
+  `stock` int,
+  `thumbnail` varchar(255),
+  `favorite` int,
+  `status` varchar(255),
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+
+CREATE TABLE `product_images` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `product_id` int,
+  `image_url` varchar(255)
+);
+
+CREATE TABLE `product_specifications` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `product_id` int,
+  `spec_name` varchar(255),
+  `spec_value` varchar(255)
+);
+
+CREATE TABLE `carts` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `created_at` timestamp
+);
+
+CREATE TABLE `cart_items` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `cart_id` int,
+  `product_id` int,
+  `quantity` int
+);
+
+CREATE TABLE `orders` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `order_date` datetime,
+  `status` varchar(255),
+  `total_amount` decimal,
+  `shipping_address` text,
+  `payment_method` varchar(255),
+  `payment_status` varchar(255),
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+
+CREATE TABLE `order_items` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `order_id` int,
+  `product_id` int,
+  `quantity` int,
+  `unit_price` decimal,
+  `subtotal` decimal
+);
+
+CREATE TABLE `reviews` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `product_id` int,
+  `rating` int,
+  `comment` text,
+  `created_at` timestamp
+);
+
+ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+ALTER TABLE `products` ADD FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`);
+
+ALTER TABLE `product_images` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+ALTER TABLE `product_specifications` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+ALTER TABLE `carts` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `cart_items` ADD FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
+
+ALTER TABLE `cart_items` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `order_items` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+ALTER TABLE `order_items` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+ALTER TABLE `reviews` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `reviews` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
 
 ---
 
